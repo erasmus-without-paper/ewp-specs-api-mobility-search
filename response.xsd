@@ -5,14 +5,14 @@
     xmlns:mobility="https://github.com/erasmus-without-paper/ewp-specs-api-mobilities/blob/master/response.xsd"
     elementFormDefault="qualified"
 
-    targetNamespace="https://github.com/erasmus-without-paper/ewp-specs-api-mobility-search/blob/master/response.xsd"
-    xmlns="https://github.com/erasmus-without-paper/ewp-specs-api-mobility-search/blob/master/response.xsd"
+    targetNamespace="https://github.com/erasmus-without-paper/ewp-specs-api-mobility-search/tree/master"
+    xmlns="https://github.com/erasmus-without-paper/ewp-specs-api-mobility-search/tree/master"
 >
     <!-- WRTODO: Replace all occurrences of 'master' (in all projects) with 'stable-v1' upon release. -->
 
     <xs:import
         schemaLocation="https://raw.githubusercontent.com/erasmus-without-paper/ewp-specs-api-mobilities/master/response.xsd"
-        namespace="https://github.com/erasmus-without-paper/ewp-specs-api-mobilities/blob/master/response.xsd"
+        namespace="https://github.com/erasmus-without-paper/ewp-specs-api-mobilities/tree/master"
     />
     
     <xs:annotation>
