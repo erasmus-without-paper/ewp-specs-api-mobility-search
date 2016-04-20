@@ -14,7 +14,7 @@
         schemaLocation="https://raw.githubusercontent.com/erasmus-without-paper/ewp-specs-api-mobilities/master/response.xsd"
         namespace="https://github.com/erasmus-without-paper/ewp-specs-api-mobilities/tree/master"
     />
-    
+
     <xs:annotation>
         <xs:documentation>
             This schema is a part of the Erasmus Without Paper project. Before you start

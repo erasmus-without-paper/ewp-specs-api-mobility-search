@@ -70,7 +70,7 @@ described in the Outgoing Mobilities API. That is:
 
  * Servers MUST publish IDs of every Outgoing Mobility object which is
    accessible via its Outgoing Mobilities API.
-   
+
  * Server MUST NOT publish IDs of objects which are NOT accessible via its
    Outgoing Mobilities API. Clients which receive IDs from this API should
    always be able to fetch objects referenced by these IDs via the Outgoing
