@@ -83,7 +83,7 @@ Handling of invalid parameters
  * General [error handling rules][error-handling] apply.
 
  * Invalid (or unknown) `sending_hei_id` and `receiving_hei_id` values MUST be
-   ignored by the server, i.e. servers MUST still respond with a a valid HTTP
+   ignored by the server, i.e. servers MUST still respond with a valid HTTP
    200 XML response. If *none* of the values on at least one of these lists is
    known, then servers MUST respond with an empty envelope.
 
