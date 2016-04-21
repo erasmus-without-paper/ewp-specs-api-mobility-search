@@ -2,7 +2,7 @@
 <xs:schema
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xml="http://www.w3.org/XML/1998/namespace"
-    xmlns:mobility="https://github.com/erasmus-without-paper/ewp-specs-api-mobilities/blob/master/response.xsd"
+    xmlns:mobility="https://github.com/erasmus-without-paper/ewp-specs-api-mobilities/tree/master"
     elementFormDefault="qualified"
 
     targetNamespace="https://github.com/erasmus-without-paper/ewp-specs-api-mobility-search/tree/master"
