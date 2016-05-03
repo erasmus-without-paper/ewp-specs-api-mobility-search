@@ -31,18 +31,34 @@ Parameters MUST be provided either in a query string (for GET requests), or in
 the `application/x-www-form-urlencoded` format (for POST requests).
 
 
-### `sending_hei_id` (repeatable, optional)
+### Default (no parameters)
 
-A list of institution identifiers. If given, then the results return MUST
-contain only these Outgoing Mobility objects the sending institution of which
-matches with **any** of these identifiers.
+By default (when no parameters are supplied), the server is REQUIRED to return
+**all** Outgoing Mobility objects, including the ones from ancient history, and 
+filtered only by the *access rights* of the caller.
+
+Parameters described below are used to *filter* these default data sets.
+Clients SHOULD use these parameters in order to make the responses smaller.
+
+
+### `iia_id` (repeatable, optional)
+
+A list of Interinstitutional Agreement identifiers. If given, then the results
+returned MUST contain only such Outgoing Mobility objects whose IIA matches
+**any** of the `iia_id` identifiers.
 
 This parameter is *repeatable*, so the request MAY contain multiple occurrences
 of it. The server is REQUIRED to process all of them.
 
-It the parameter is omitted, then the server MUST NOT filter the response based
-on the sending institution. (It has exactly the same meaning as passing all HEI
-IDs associated with this EWP Host.)
+
+### `sending_hei_id` (repeatable, optional)
+
+A list of institution identifiers. If given, then the results returned MUST
+contain only such Outgoing Mobility objects whose sending institution matches
+**any** of the `sending_hei_id` identifiers.
+
+This parameter is *repeatable*, so the request MAY contain multiple occurrences
+of it. The server is REQUIRED to process all of them.
 
 
 ### `receiving_hei_id` (repeatable, optional)
@@ -82,10 +98,12 @@ Handling of invalid parameters
 
  * General [error handling rules][error-handling] apply.
 
- * Invalid (or unknown) `sending_hei_id` and `receiving_hei_id` values MUST be
+ * Invalid (or unknown) values provided in `iia_id`, `sending_hei_id` and
+   `receiving_hei_id` parameters MUST be
    ignored by the server, i.e. servers MUST still respond with a valid HTTP
-   200 XML response. If *none* of the values on at least one of these lists is
-   known, then servers MUST respond with an empty envelope.
+   200 XML response. (If at least one of these lists contains only such IDs
+   which are unknown to the server, then the server MUST respond with an empty
+   envelope.)
 
 
 Response
