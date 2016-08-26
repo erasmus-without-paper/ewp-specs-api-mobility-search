@@ -27,35 +27,32 @@ Request method
 Request parameters
 ------------------
 
-Parameters MUST be provided either in a query string (for GET requests), or in
-the `application/x-www-form-urlencoded` format (for POST requests).
+Parameters MUST be provided in the regular `application/x-www-form-urlencoded`
+format.
 
 
-### Default (no parameters)
+### `sending_hei_id` (required)
 
-By default (when no parameters are supplied), the server is REQUIRED to return
-**all** Outgoing Mobility objects, including the ones from ancient history, and 
-filtered only by the *access rights* of the caller.
+An identifier of the institution which is the master of the Outgoing Mobility
+objects we want to search through. This parameter MUST be required by the
+server even if it covers only a single institution. It is *not* repeatable.
 
-Parameters described below are used to *filter* these default data sets.
-Clients SHOULD use these parameters in order to make the responses smaller.
+
+### `limit` (optional)
+
+Positive integer of `none`. Default is **20**.
+
+If `none` is given, the server is REQUIRED to return **all** Mobility objects
+(match the criteria imposed by other parameters, if any were given). This list
+can be huge, but it will allow the clients to fetch the complete list of
+Mobility identifiers (to facilitate full replication).
 
 
 ### `iia_id` (repeatable, optional)
 
 A list of Interinstitutional Agreement identifiers. If given, then the results
-returned MUST contain only such Outgoing Mobility objects whose IIA matches
-**any** of the `iia_id` identifiers.
-
-This parameter is *repeatable*, so the request MAY contain multiple occurrences
-of it. The server is REQUIRED to process all of them.
-
-
-### `sending_hei_id` (repeatable, optional)
-
-A list of institution identifiers. If given, then the results returned MUST
-contain only such Outgoing Mobility objects whose sending institution matches
-**any** of the `sending_hei_id` identifiers.
+returned will be filtered and they MUST contain only such Outgoing Mobility
+objects whose IIA matches **any** of the `iia_id` identifiers.
 
 This parameter is *repeatable*, so the request MAY contain multiple occurrences
 of it. The server is REQUIRED to process all of them.
@@ -63,9 +60,12 @@ of it. The server is REQUIRED to process all of them.
 
 ### `receiving_hei_id` (repeatable, optional)
 
-This parameter has exactly the same meaning as the `sending_hei_id` parameter,
-the only difference being that it is the *receiving* institutions which are
-filtered by it (not the sending ones).
+A list of institution identifiers. If given, then the results returned MUST
+contain only such Outgoing Mobility objects whose receiving institution matches
+**any** of the `receiving_hei_id` identifiers.
+
+This parameter is *repeatable*, so the request MAY contain multiple occurrences
+of it. The server is REQUIRED to process all of them.
 
 
 ### (more parameters to come)
@@ -88,9 +88,8 @@ described in the Outgoing Mobilities API. That is:
    accessible (to the caller) via its Outgoing Mobilities API.
 
  * Server MUST NOT publish IDs of objects which are NOT accessible via its
-   Outgoing Mobilities API. Clients which receive IDs from this API should
-   always be able to fetch objects referenced by these IDs via the Outgoing
-   Mobilities API.
+   Outgoing Mobilities API. Clients which receive IDs from this API should be
+   able to fetch all objects referenced by those IDs.
 
 
 Handling of invalid parameters
@@ -98,12 +97,22 @@ Handling of invalid parameters
 
  * General [error handling rules][error-handling] apply.
 
- * Invalid (or unknown) values provided in `iia_id`, `sending_hei_id` and
-   `receiving_hei_id` parameters MUST be
-   ignored by the server, i.e. servers MUST still respond with a valid HTTP
-   200 XML response. (If at least one of these lists contains only such IDs
-   which are unknown to the server, then the server MUST respond with an empty
-   envelope.)
+ * Note, that parameters are "AND-ed" together, but their values are "OR-ed".
+   This means that invalid or unknown values provided in `iia_id`,
+   `sending_hei_id` and `receiving_hei_id` parameters MUST be **allowed** (but
+   **not ignored**) by the server.
+   
+   The difference between "being allowed" and "being ignored" becomes clear
+   once you try to analyze the scenario when one of these lists contains
+   **only** such IDs which are unknown to the server. The server MUST respond
+   with an empty `<response>` element in this case, regardless of all the other
+   parameters. For example:
+   
+   * `?sending_hei_id=known&iia_id=known&iia_id=UNKNOWN` will return some
+     results,
+   * `?sending_hei_id=known&iia_id=known` will return exactly the same results,
+   * `?sending_hei_id=known&iia_id=UNKNOWN` will **NEVER** return any results,
+   * `?sending_hei_id=known` will return results again (though not the same).
 
 
 Response
