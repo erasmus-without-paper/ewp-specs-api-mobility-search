@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema elementFormDefault="qualified" targetNamespace="https://github.com/erasmus-without-paper/ewp-specs-api-mobility-search/tree/master" xmlns="https://github.com/erasmus-without-paper/ewp-specs-api-mobility-search/tree/master" xmlns:mobility="https://github.com/erasmus-without-paper/ewp-specs-api-mobilities/tree/master" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema elementFormDefault="qualified" targetNamespace="https://github.com/erasmus-without-paper/ewp-specs-api-mobility-search/tree/master" xmlns="https://github.com/erasmus-without-paper/ewp-specs-api-mobility-search/tree/master" xmlns:mobility="https://github.com/erasmus-without-paper/ewp-specs-api-mobilities/blob/master/endpoints/get-response.xsd" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <!-- WRTODO: Replace all occurrences of 'master' (in all projects) with 'stable-v1' upon release. -->
-    <xs:import namespace="https://github.com/erasmus-without-paper/ewp-specs-api-mobilities/tree/master" schemaLocation="https://raw.githubusercontent.com/erasmus-without-paper/ewp-specs-api-mobilities/master/response.xsd"/>
     <xs:annotation>
         <xs:documentation>This schema is a part of the Erasmus Without Paper project. Before you start
             using it, make sure you have read the general rules described here:
